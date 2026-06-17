@@ -8,6 +8,9 @@ import java.util.List;
 @Service
 public class ProductService {
 
+    private static final double MINIMUM_VALID_PRICE = 0.0;
+    private static final int MINIMUM_VALID_STOCK = 0;
+
     private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
@@ -15,10 +18,10 @@ public class ProductService {
     }
 
     public Product save(Product product) {
-        if (product.getPrice() <= 0) {
+        if (product.getPrice() <= MINIMUM_VALID_PRICE) {
             throw new IllegalArgumentException("El precio debe ser mayor a cero");
         }
-        if (product.getStock() < 0) {
+        if (product.getStock() < MINIMUM_VALID_STOCK) {
             throw new IllegalArgumentException("El stock no puede ser negativo");
         }
         return productRepository.save(product);
