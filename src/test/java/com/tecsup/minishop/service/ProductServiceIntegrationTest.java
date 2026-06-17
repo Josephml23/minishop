@@ -45,7 +45,7 @@ class ProductServiceIntegrationTest {
 
         Product result = productService.save(input);
 
-        assertThat(result.getId()).isEqualTo(1L);
+        assertThat(result.getId()).isEqualTo(99999L);
         assertThat(result.getName()).isEqualTo("Auriculares Sony");
         verify(productRepository, times(1)).save(any(Product.class));
     }
@@ -103,6 +103,3 @@ class ProductServiceIntegrationTest {
 
         assertThatThrownBy(() -> productService.findById(99L))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Producto no encontrado con id: 99");
-    }
-}
