@@ -96,10 +96,13 @@ class ProductServiceIntegrationTest {
         verify(productRepository, times(1)).findAll();
     }
 
-    @Test
+@Test
     @DisplayName("Debe lanzar excepción cuando el producto no existe por ID")
     void shouldThrowExceptionWhenProductNotFound() {
         when(productRepository.findById(99L)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> productService.findById(99L))
                 .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("Producto no encontrado con id: 99");
+    }
+}
